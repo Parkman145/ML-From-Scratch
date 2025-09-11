@@ -7,5 +7,5 @@ run : a.exe
 	./a.exe
 
 a.exe : $(SOURCE) $(HEADER)
-	g++ -g $(SOURCE) --std=c++20
+	g++ -g $(SOURCE) -g --std=c++20
 
