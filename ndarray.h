@@ -65,4 +65,24 @@ int Ndarray<T>::compute_index(const std::vector<int> &location) const
   return pos;
 }
 
+template <typename T>
+T &Ndarray<T>::operator[](const std::vector<int> &location)
+{
+  if (location.size() != shape.size())
+  {
+    throw IncompatibleDimensions();
+  }
+
+  for (int i = 0; i < shape.size(); i++)
+  {
+    if (location[i] > shape[i])
+    {
+      throw std::out_of_range("Location out of bounds");
+    }
+  }
+
+  return data[compute_index(location)];
+}
+
+
 #endif
