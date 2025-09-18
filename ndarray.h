@@ -23,8 +23,24 @@ public:
   
   void reshape();
   const std::vector<int> get_shape() const { return shape; };
-};
 
+  class InvalidShapeException : public std::exception
+  {
+    virtual const char *what() const throw() { return "Invalid Shape"; }
+  };
+
+  class IncompatibleShape : public std::exception
+  {
+    virtual const char *what() const throw() { return "Incompatible Shape"; }
+  };
+  class IncompatibleDimensions : public std::exception
+  {
+    virtual const char *what() const throw()
+    {
+      return "Incompatible Dimensions";
+    }
+  };
+};
 
 template <typename T>
 Ndarray<T>::Ndarray(const std::vector<int> &shape)
