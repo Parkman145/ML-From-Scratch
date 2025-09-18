@@ -20,7 +20,12 @@ public:
   Ndarray(const std::vector<int> &shape, const std::vector<T> &data);
 
   T &operator[](const std::vector<int> &location);
-  
+
+  Ndarray<T> operator+(const Ndarray<T> &other) const;
+  Ndarray<T> operator-(const Ndarray<T> &other) const;
+  Ndarray<T> operator*(const Ndarray<T> &other) const;
+  Ndarray<T> operator/(const Ndarray<T> &other) const;
+
   void reshape();
   const std::vector<int> get_shape() const { return shape; };
 
@@ -113,6 +118,60 @@ Ndarray<T> Ndarray<T>::operator+(const Ndarray<T> &other) const
   for (int i = 0; i < data.size(); i++)
   {
     result.data[i] = data[i] + other.data[i];
+  }
+
+  return result;
+}
+
+template <typename T>
+Ndarray<T> Ndarray<T>::operator-(const Ndarray<T> &other) const
+{
+  if (shape != other.shape)
+  {
+    throw IncompatibleShape();
+  }
+
+  Ndarray<T> result(shape);
+
+  for (int i = 0; i < data.size(); i++)
+  {
+    result.data[i] = data[i] - other.data[i];
+  }
+
+  return result;
+}
+
+template <typename T>
+Ndarray<T> Ndarray<T>::operator*(const Ndarray<T> &other) const
+{
+  if (shape != other.shape)
+  {
+    throw IncompatibleShape();
+  }
+
+  Ndarray<T> result(shape);
+
+  for (int i = 0; i < data.size(); i++)
+  {
+    result.data[i] = data[i] * other.data[i];
+  }
+
+  return result;
+}
+
+template <typename T>
+Ndarray<T> Ndarray<T>::operator/(const Ndarray<T> &other) const
+{
+  if (shape != other.shape)
+  {
+    throw IncompatibleShape();
+  }
+
+  Ndarray<T> result(shape);
+
+  for (int i = 0; i < data.size(); i++)
+  {
+    result.data[i] = data[i] / other.data[i];
   }
 
   return result;
