@@ -1,11 +1,15 @@
 #ifndef NDARRAY
 #define NDARRAY
 
-#include <vector>
 #include "vectorutils.h"
+#include <iostream>
+#include <stdexcept>
+#include <vector>
 
-template <typename T> class Ndarray {
-private:
+template <typename T>
+class Ndarray
+{
+private: // Private
   std::vector<T> data;
   std::vector<int> shape;
 
