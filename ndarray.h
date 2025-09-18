@@ -49,4 +49,20 @@ Ndarray<T>::Ndarray(const std::vector<int> &shape, const std::vector<T> &data)
   this->shape = shape;
 }
 
+// No bounds checking. Use with caution.
+template <typename T>
+int Ndarray<T>::compute_index(const std::vector<int> &location) const
+{
+  int mult = 1;
+  int pos = 0;
+
+  for (int i = shape.size() - 1; i >= 0; i--)
+  {
+    pos += location[i] * mult;
+    mult *= shape[i];
+  }
+
+  return pos;
+}
+
 #endif
