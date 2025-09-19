@@ -46,12 +46,14 @@ public:
       }
       os << " " << array.data[i] << ", ";
       
+      int newlines = 0;
       for (auto checkpoint : checkpoints) {
-  
         if (i % checkpoint == checkpoint-1) {
           os << "]";
+          newlines++;
         }
-    }
+      }
+      os << std::string(newlines, '\n');
     }
     return os;
   }
