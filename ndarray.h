@@ -26,6 +26,36 @@ public:
   Ndarray<T> operator*(const Ndarray<T> &other) const;
   Ndarray<T> operator/(const Ndarray<T> &other) const;
 
+  friend std::ostream& operator<<(std::ostream& os, const Ndarray<T>& array) {
+
+    std::vector<int> checkpoints(array.shape.size());
+
+    int mult = 1;
+    
+    for (int i = checkpoints.size()-1; i >= 0; i--) {
+      mult *= array.shape[i];
+      checkpoints[i] = mult;
+    }
+
+    for (int i = 0; i < array.data.size(); i++) {
+      for (auto checkpoint : checkpoints) {
+        if (i % checkpoint == 0) {
+          os << "[";
+        }  
+        
+      }
+      os << " " << array.data[i] << ", ";
+      
+      for (auto checkpoint : checkpoints) {
+  
+        if (i % checkpoint == checkpoint-1) {
+          os << "]";
+        }
+    }
+    }
+    return os;
+  }
+
   void reshape();
   const std::vector<int> get_shape() const { return shape; };
 
