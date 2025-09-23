@@ -17,6 +17,7 @@ namespace vector_utils {
 
         return prod;
     }
+    bool compatible_shape(std::vector<int> a, std::vector<int> b);
 }
 
 #endif
