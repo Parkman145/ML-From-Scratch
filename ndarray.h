@@ -72,7 +72,7 @@ public:
 
   void reshape();
   const std::vector<int> get_shape() const { return shape; };
-
+  const std::vector<T>& get_data() const { return data; };
   class InvalidShapeException : public std::exception
   {
     virtual const char *what() const throw() { return "Invalid Shape"; }
