@@ -26,6 +26,15 @@ public:
   Ndarray<T> operator*(const Ndarray<T> &other) const;
   Ndarray<T> operator/(const Ndarray<T> &other) const;
 
+  template <typename T2>
+  Ndarray<T> operator+(const T2 &other) const;
+  template <typename T2>
+  Ndarray<T> operator-(const T2 &other) const;
+  template <typename T2>
+  Ndarray<T> operator*(const T2 &other) const;
+  template <typename T2>
+  Ndarray<T> operator/(const T2 &other) const;
+
   friend std::ostream& operator<<(std::ostream& os, const Ndarray<T>& array) {
 
     std::vector<int> checkpoints(array.shape.size());
@@ -204,6 +213,63 @@ Ndarray<T> Ndarray<T>::operator/(const Ndarray<T> &other) const
   for (int i = 0; i < data.size(); i++)
   {
     result.data[i] = data[i] / other.data[i];
+  }
+
+  return result;
+}
+
+
+template <typename T>
+template <typename T2>
+Ndarray<T> Ndarray<T>::operator+(const T2 &other) const
+{
+  Ndarray<T> result(shape);
+
+  for (int i = 0; i < data.size(); i++)
+  {
+    result.data[i] = data[i] + other;
+  }
+
+  return result;
+}
+
+template <typename T>
+template <typename T2>
+Ndarray<T> Ndarray<T>::operator-(const T2 &other) const
+{
+  Ndarray<T> result(shape);
+
+  for (int i = 0; i < data.size(); i++)
+  {
+    result.data[i] = data[i] - other;
+  }
+
+  return result;
+}
+
+template <typename T>
+template <typename T2>
+Ndarray<T> Ndarray<T>::operator*(const T2 &other) const
+{
+  Ndarray<T> result(shape);
+
+  for (int i = 0; i < data.size(); i++)
+  {
+    result.data[i] = data[i] * other;
+  }
+
+  return result;
+}
+
+template <typename T>
+template <typename T2>
+Ndarray<T> Ndarray<T>::operator/(const T2 &other) const
+{
+  Ndarray<T> result(shape);
+
+  for (int i = 0; i < data.size(); i++)
+  {
+    result.data[i] = data[i] / other;
   }
 
   return result;
