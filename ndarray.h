@@ -2,6 +2,7 @@
 #define NDARRAY
 
 #include "vectorutils.h"
+#include <cstddef>
 #include <iostream>
 #include <stdexcept>
 #include <vector>
@@ -18,6 +19,8 @@ private: // Private
 public:
   Ndarray(const std::vector<int> &shape);
   Ndarray(const std::vector<int> &shape, const std::vector<T> &data);
+
+  void write_data(const std::vector<T>& new_data);
 
   T &operator[](const std::vector<int> &location);
 
@@ -125,6 +128,15 @@ int Ndarray<T>::compute_index(const std::vector<int> &location) const
   }
 
   return pos;
+}
+
+template <typename T>
+void Ndarray<T>::write_data(const std::vector<T> &new_data){
+  if (data.size() != new_data.size()) {
+    throw std::invalid_argument("Vectors size must match");
+  }
+
+  data = new_data;
 }
 
 template <typename T>
