@@ -70,7 +70,7 @@ public:
     return os;
   }
 
-  void reshape();
+  void reshape(const std::vector<int>& shape );
   const std::vector<int> get_shape() const { return shape; };
   const std::vector<T>& get_data() const { return data; };
   class InvalidShapeException : public std::exception
@@ -286,5 +286,16 @@ Ndarray<T> Ndarray<T>::operator/(const T2 &other) const
 
   return result;
 }
+
+template <typename T>
+void Ndarray<T>::reshape(const std::vector<int>& new_shape) {
+  if (vector_utils::product(new_shape) != vector_utils::product(shape)) {
+    throw IncompatibleShape();
+  }
+
+  shape = new_shape;
+}
+
+// template<typename T>
 
 #endif
