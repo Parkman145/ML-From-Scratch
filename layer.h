@@ -31,5 +31,31 @@ class ReLU : public Layer<T> {
 
 };
 
+template<typename T>
+class Flatten : public Layer<T> {
+
+    public:
+    Ndarray<T> operator()(const Ndarray<T> &arr) const {
+        if (arr.get_shape().size() < 2) {
+            throw typename Ndarray<T>::IncompatibleDimensions();
+        }
+        
+        auto result = arr;
+
+        auto new_shape = std::vector<int>(2);
+
+        new_shape[0] = result.get_shape()[0];
+
+        int prod = 1;
+
+        new_shape[1] = vector_utils::product(result.get_shape())/result.get_shape()[0];
+
+        result.reshape(new_shape);
+        
+        return result;
+
+    }
+};
+
 
 #endif
