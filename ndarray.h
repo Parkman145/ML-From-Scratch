@@ -23,6 +23,7 @@ public:
   void write_data(const std::vector<T>& new_data);
 
   T &operator[](const std::vector<int> &location);
+  T &operator[](const int location);
 
   Ndarray<T> operator+(const Ndarray<T> &other) const;
   Ndarray<T> operator-(const Ndarray<T> &other) const;
@@ -158,6 +159,17 @@ T &Ndarray<T>::operator[](const std::vector<int> &location)
   return data[compute_index(location)];
 }
 
+
+template <typename T>
+T &Ndarray<T>::operator[](const int location)
+{
+  if (location >= data.size())
+  {
+    throw std::out_of_range("Location out of data buffer range");
+  }
+
+  return data[location];
+}
 template <typename T>
 Ndarray<T> Ndarray<T>::operator+(const Ndarray<T> &other) const
 {
