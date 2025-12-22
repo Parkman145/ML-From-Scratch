@@ -2,7 +2,9 @@
 #define LAYER
 
 #include "ndarray.h"
+#include "vectorutils.h"
 #include <algorithm>
+#include <iterator>
 #include <vector>
 template<typename T>
 class Layer {
@@ -53,6 +55,40 @@ class Flatten : public Layer<T> {
         result.reshape(new_shape);
         
         return result;
+
+    }
+};
+
+template<typename T>
+class Dense : public Layer<T> {
+    private: 
+    int input_features;
+    int output_features;
+    Ndarray<T> weights; 
+    public:
+
+    
+    Dense(int inp_features, int out_features) : input_features{inp_features}, output_features{out_features}, weights{{input_features, output_features}}{
+        
+    }
+
+    // TODO
+    Ndarray<T> operator()(const Ndarray<T> &arr) const {
+        // Size of each sample
+        int batch_step_size = arr.get_data().size()/arr.get_shape()[0];
+        int n = arr.get_shape()[0];
+
+        Ndarray<T> output{n, output_features};
+
+        // Samples
+        for (int sample_offset = 0; sample_offset < arr.get_data().size(); sample_offset += batch_step_size);
+            // Input units    
+            for (int i = 0; i < input_features; i++){
+                // Output units
+                for (int j = 0; j < output_features; j++){
+                    output[]
+                }
+            }
 
     }
 };
