@@ -39,6 +39,9 @@ public:
   template <typename T2>
   Ndarray<T> operator/(const T2 &other) const;
 
+  template <typename T2>
+  static Ndarray<T> matmul(const T& mat1, const T2& mat2);
+
   friend std::ostream& operator<<(std::ostream& os, const Ndarray<T>& array) {
 
     std::vector<int> checkpoints(array.shape.size());
@@ -306,6 +309,13 @@ void Ndarray<T>::reshape(const std::vector<int>& new_shape) {
   }
 
   shape = new_shape;
+}
+
+template <typename T1>
+template <typename T2>
+Ndarray<T1> Ndarray<T1>::matmul(const T1& mat1, const T2& mat2) {
+  
+
 }
 
 // template<typename T>
