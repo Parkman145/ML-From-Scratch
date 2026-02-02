@@ -78,18 +78,9 @@ class Dense : public Layer<T> {
         int batch_step_size = arr.get_data().size()/arr.get_shape()[0];
         int n = arr.get_shape()[0];
 
-        Ndarray<T> output{n, output_features};
+        auto output = Ndarray<T>::matmul(arr, weights);
 
-        // Samples
-        for (int sample_offset = 0; sample_offset < arr.get_data().size(); sample_offset += batch_step_size);
-            // Input units    
-            for (int i = 0; i < input_features; i++){
-                // Output units
-                for (int j = 0; j < output_features; j++){
-                    output[]
-                }
-            }
-
+        return output;
     }
 };
 
