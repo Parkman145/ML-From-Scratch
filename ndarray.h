@@ -25,6 +25,11 @@ public:
   T &operator[](const std::vector<int> &location);
   T &operator[](const int location);
 
+  const T &operator[](const std::vector<int> &location) const;
+  const T &operator[](const int location) const;
+
+
+
   Ndarray<T> operator+(const Ndarray<T> &other) const;
   Ndarray<T> operator-(const Ndarray<T> &other) const;
   Ndarray<T> operator*(const Ndarray<T> &other) const;
@@ -173,6 +178,21 @@ T &Ndarray<T>::operator[](const int location)
 
   return data[location];
 }
+
+template <typename T>
+const T &Ndarray<T>::operator[](const std::vector<int> &location) const
+{
+  return const_cast<T&>((*this).operator[](location));
+
+}
+
+template <typename T>
+const T &Ndarray<T>::operator[](const int location) const
+{
+  return const_cast<T&>((*this).operator[](location));
+
+}
+
 template <typename T>
 Ndarray<T> Ndarray<T>::operator+(const Ndarray<T> &other) const
 {
