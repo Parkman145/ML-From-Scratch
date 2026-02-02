@@ -44,8 +44,7 @@ public:
   template <typename T2>
   Ndarray<T> operator/(const T2 &other) const;
 
-  template <typename T2>
-  static Ndarray<T> matmul(const T& mat1, const T2& mat2);
+  static Ndarray<T> matmul(const Ndarray<T>& mat1, const Ndarray<T>& mat2);
 
   friend std::ostream& operator<<(std::ostream& os, const Ndarray<T>& array) {
 
@@ -329,10 +328,28 @@ void Ndarray<T>::reshape(const std::vector<int>& new_shape) {
   shape = new_shape;
 }
 
-template <typename T1>
-template <typename T2>
-Ndarray<T1> Ndarray<T1>::matmul(const T1& mat1, const T2& mat2) {
-  
+template <typename T>
+Ndarray<T> Ndarray<T>::matmul(const Ndarray<T>& mat1, const Ndarray<T>& mat2) {
+  if (mat1.shape.size() != 2 || mat2.shape.size() != 2){
+    throw InvalidShapeException();
+  }
+
+  if (mat1.shape[1] != mat2.shape[0]){
+    throw IncompatibleShape();
+  }
+
+
+  Ndarray<T> result({mat1.shape[0], mat2.shape[1]});
+
+  for (int i = 0; i < mat1.shape[0]; i++){
+    for (int j = 0; j < mat2.shape[1]; j++) {
+      for (int k = 0; k < mat1.shape[1]; k++){
+        result[{i, j}] += mat1[{i, k}] * mat2[{k, j}];
+      }
+    }
+  }
+
+  return result;
 
 }
 
