@@ -182,15 +182,13 @@ T &Ndarray<T>::operator[](const int location)
 template <typename T>
 const T &Ndarray<T>::operator[](const std::vector<int> &location) const
 {
-  return const_cast<T&>((*this).operator[](location));
-
+  return const_cast<Ndarray<T>&>(*this).operator[](location);
 }
 
 template <typename T>
 const T &Ndarray<T>::operator[](const int location) const
 {
-  return const_cast<T&>((*this).operator[](location));
-
+  return const_cast<Ndarray<T>&>(*this).operator[](location);
 }
 
 template <typename T>
