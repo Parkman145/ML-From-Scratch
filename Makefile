@@ -7,10 +7,10 @@ run : a.exe
 	./a.exe
 
 a.exe : $(SOURCE) $(HEADER)
-	g++ -g $(SOURCE) -g --std=c++20
+	g++ -g $(SOURCE) -g --std=c++23
 
 playground.exe : playground.cpp
-	g++ -g playground.cpp -g --std=c++20 -o playground
+	g++ -g playground.cpp -g --std=c++23 -o playground
 
 play : playground.exe
 	./playground.exe
