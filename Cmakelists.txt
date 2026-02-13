@@ -1,0 +1,16 @@
+cmake_minimum_required(VERSION 3.31.5)
+
+project(MLFromScratch LANGUAGES CXX)
+
+include(FetchContent)
+
+FetchContent_Declare(CNDA GIT_REPOSITORY https://github.com/Parkman145/CNDA.git GIT_TAG main)
+
+FetchContent_MakeAvailable(CNDA)
+
+add_executable(MLFromScratch src/main.cpp)
+
+target_link_libraries(MLFromScratch PRIVATE CNDA::CNDA)
+
+
+target_compile_features(MLFromScratch PRIVATE cxx_std_23)

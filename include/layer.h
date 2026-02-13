@@ -1,8 +1,8 @@
 #ifndef LAYER
 #define LAYER
 
-#include "ndarray.h"
-#include "vectorutils.h"
+#include "CNDA/ndarray.h"
+#include "CNDA/vectorutils.h"
 #include <algorithm>
 #include <iterator>
 #include <vector>
